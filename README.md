@@ -1,5 +1,7 @@
 #Alright Reserved developer by murtuzadeveloper@gmail.com contact +923060824762
 
+# Youtube Video for Deployment unsderstanding and how to run https://www.youtube.com/watch?v=fcwJsIGJbEQ
+
 # Install Docker Desktop for Windows and ensure it is running.
 
 # docker compose up --build run in merchant_sys open powershell to the project folder
