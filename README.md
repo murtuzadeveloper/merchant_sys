@@ -1,95 +1,125 @@
-#Alright Reserved developer by murtuzadeveloper@gmail.com contact +923060824762
+## 👨‍💻 Developer
 
-# Youtube Video for Deployment unsderstanding and how to run https://www.youtube.com/watch?v=fcwJsIGJbEQ
-
-# Install Docker Desktop for Windows and ensure it is running.
-
-# docker compose up --build run in merchant_sys open powershell to the project folder
-This single command will automatically:
-
-# This command is good when are you running more then one time
-docker compose build --no-cache
-docker compose up
-
-Download the necessary database (PostgreSQL), Redis, and RabbitMQ images.
-Build your Backend (NestJS) and Frontend (Next.js) applications from source.
-Start all 5 services and network them together.
-
-# Then you have to open Docker Desktop inside container you can see merchant_sys open that an run web services
-Then open this URL for run Frontend with Backend
-http://localhost:3001/login
+**Murtuza Developer**  
+📧 murtuzadeveloper@gmail.com  
+📱 +92 306 0824762
+---
 
 # Merchant Transaction System
+A full-stack application built with **NestJS (Backend)** and **Next.js (Frontend)**, integrated with PostgreSQL, Redis, and RabbitMQ using Docker Compose.
+---
 
-A full-stack application with NestJS backend and Next.js frontend, integrated with PostgreSQL, Redis, and RabbitMQ via Docker Compose.
+## 🎥 Deployment & Running Guide
+Watch the full deployment explanation and running guide here:  
+https://www.youtube.com/watch?v=fcwJsIGJbEQ
+---
 
-## Tech Stack
-- **Backend:** NestJS (TypeScript), TypeORM, PostgreSQL
-- **Frontend:** Next.js (React), Vanilla CSS modules
-- **Infrastructure:** Docker Compose, Redis, RabbitMQ
+## 🐳 Prerequisite
 
-## Prerequisites
-- Docker & Docker Compose
-- Node.js (for local development outside Docker)
+- Install **Docker Desktop for Windows**
+- Make sure Docker Desktop is running before executing commands
+---
 
-## Getting Started
+## 🚀 Run the Project (Docker - Recommended)
 
-### 1. Environment Setup
-The project comes with default environment variables in `docker-compose.yml` and `.env` files.
-- Backend: `backend/.env`
-- Frontend: `frontend/.env.local`
-
-### 2. Run with Docker (Recommended)
-To start the entire system (Database, Redis, RabbitMQ, Backend API, Frontend):
-
-```bash
+Open **PowerShell** in the project root folder (`merchant_sys`) and run:
 docker compose up --build
-```
+This single command will automatically:
+- Download PostgreSQL, Redis, and RabbitMQ images
+- Build the Backend (NestJS)
+- Build the Frontend (Next.js)
+- Start all 5 services
+Connect everything via Docker network
 
-- **Frontend:** http://localhost:3001
-- **Backend API:** http://localhost:3000
-- **RabbitMQ Management:** http://localhost:15672 (User: guest, Pass: guest)
+## 🔁 Running Again (Without Rebuilding Everything)
+If you are running the project multiple times:
+- docker compose build --no-cache
+- docker compose up
+---
 
-### 3. Local Development (Optional) I dont prefer to use take so much time and manual efforts
-If you prefer running services locally without Docker for the app code:
+## 🌐 Access the Application
+Open Docker Desktop
+- Go to Containers
+- Find merchant_sys
+- Make sure web services are running
+Then open:
+Frontend with Backend:	
+- http://localhost:3001/login
+Other Services:
+- Frontend: http://localhost:3001
+- Backend API: http://localhost:3000
+- RabbitMQ Management: http://localhost:15672   (Username: guest, Password: guest)
+---
 
-**Backend:**
-```bash
-cd backend
-npm install
-npm run start:dev
-```
+## 🛠 Tech Stack
+Backend
+- NestJS (TypeScript)
+- TypeORM
+- PostgreSQL
 
-**Frontend:**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-*Note: You still need Postgres/Redis/RabbitMQ running (e.g., via Docker).*
+Frontend
+- Next.js (React)
+- Vanilla CSS Modules
 
-## Features
-- **Merchant Auth:** Register, Login (JWT)
-- **Transactions:** Create, List (Paginated, Protected)
-- **Background Jobs:** Event publishing via RabbitMQ
-- **Caching:** Redis for transaction lists
+Infrastructure
+- Docker Compose
+- Redis
+- RabbitMQ
+---
 
-## Security & Architecture
-- **Clean Architecture:** Domain -> Application -> Infrastructure layers.
-- **Security:** Passwords hashed with bcrypt, JWT for auth, DTO validation.
-- **Isolation:** Merchants can only see their own transactions.
+## ✨ Features
+Merchant Authentication
+- Register
+- Login (JWT-based)
+- Password hashing using bcrypt
+Transactions
+- Create Transactions
+- Paginated Listing
+- Protected Routes
+- Merchant-level data isolation
+Background Jobs
+- Event publishing using RabbitMQ
+Caching
+- Redis caching for transaction lists
+---
 
-## Production Improvements (Scaling & Security)
-If running this system at scale in production, I would implement:
+## 🏗 Security & Architecture
+Clean Architecture
+- Domain → Application → Infrastructure
+Security
+- bcrypt password hashing
+- JWT authentication
+- DTO validation
+Data Isolation
+- Merchants can only access their own transactions
+---
 
-1.  **Architecture & Performance:**
-    -   **Database:** Implement read replicas for PostgreSQL and connection pooling (e.g., PgBouncer). Use database migrations for schema management.
-    -   **Caching Strategy:** Enhance Redis caching with sophisticated invalidation patterns (e.g., CDC/events) instead of simple TTL or pattern deletion.
-    -   **Microservices:** Extract the `Transactions` module into a dedicated microservice if load demands it, communicating via gRPC or RabbitMQ.
-    -   **Load Balancing:** Run multiple instances of API and Frontend behind a Load Balancer (Nginx/AWS ALB) via Kubernetes Config.
+## 📈 Production Improvements (Scaling & Security)
+If running at scale in production:
+1️⃣ Architecture & Performance
+Database
+- PostgreSQL read replicas
+- Connection pooling (PgBouncer)
+- Schema migrations
+Caching Strategy
+- Event-driven cache invalidation (CDC/events)
+Microservices
+- Extract Transactions module as separate service
+- Communication via gRPC or RabbitMQ
+Load Balancing
+- Multiple API & Frontend instances
+- Nginx or AWS ALB
+- Kubernetes deployment
+2️⃣ Security Improvements
+Use Vault or AWS Secrets Manager instead of .env
+Distributed Rate Limiting (Redis-based)
+PCI-DSS compliance (if handling real card data)
+Observability stack:
+- Open Telemetry
+- Prometheus
+- Grafana
+---
 
-2.  **Security:**
-    -   **Secrets Management:** Use Vault or AWS Secrets Manager instead of .env files.
-    -   **Rate Limiting:** Implement distributed rate limiting using Redis at the gateway level (e.g., Nginx or NestJS Throttler with Redis store).
-    -   **Compliance:** Ensure PCI-DSS compliance if handling real card data (tokenization).
-    -   **Monitoring:** Integrate OpenTelemetry, Prometheus, and Grafana for observability.
+## 📄 License
+All Rights Reserved © Murtuza Developer
+---
